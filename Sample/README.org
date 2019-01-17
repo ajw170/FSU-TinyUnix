@@ -1,0 +1,33 @@
+* Project description
+*** proj1-description.pdf   
+      project description
+*** TinyShell_project_help.pdf 
+      supplemental document that explains project 1
+      system call - fork and execvp description
+*** example.pdf
+      it explains how to use fork and  execvp system calls to run "ls -l".
+
+* example 
+*** execvp-ex1.c 
+  The created child process does not have to run the same program
+  as the parent process does. The exec type system calls allow a 
+  process to run any program files, which include a binary executable
+  or a shell script. 
+
+*** mtu-shell.c
+  This is an simple shell example which I download and revise.
+***** [[http://www.csl.mtu.edu/cs4411.ck/www/NOTES/process/fork/exec.html][Execute a Program: the execvp() System Call]]
+
+*** execvp-ex1.exe and mtu-shell.exe executables
+    To produce the executables,
+*** make 
+*** make execvp-ex1.exe
+***** "make execvp-ex1.exe" 
+***** "make mtu-shell.exe" 
+***** or, simply "make"
+
+* reference solution
+*** reference-shell.exe
+    Use this reference executalbe to compare the correctness of your proj1 
+    shell.
+***** reference-shell.exe batch.in 

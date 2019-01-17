@@ -1,0 +1,16 @@
+total 456
+-rw------- 1 uh 4020pi     58 Jan 19 11:32 batch.in
+-rw------- 1 uh 4020pi  77754 Jan 19 11:32 example.pdf
+-rw------- 1 uh 4020pi   1218 Jan 19 11:32 execvp-ex1.c
+-rw-r--r-- 1 uh 4020pi      0 Jan 19 12:38 log.txt
+-rw------- 1 uh 4020pi    689 Jan 19 12:37 main.c
+-rw------- 1 uh 4020pi   1218 Jan 19 11:43 main.c~
+-rwxr-xr-x 1 uh 4020pi   8604 Jan 19 12:37 main.exe
+-rw------- 1 uh 4020pi    255 Jan 19 11:32 makefile
+-rw------- 1 uh 4020pi   4190 Jan 19 11:32 mtu-shell.c
+-rw-r--r-- 1 uh 4020pi      7 Jan 19 12:37 output.txt
+-rw------- 1 uh 4020pi  89079 Jan 19 11:32 proj1_recitation.pdf
+-rw------- 1 uh 4020pi 123611 Jan 19 11:32 project1-description.pdf
+-rw------- 1 uh 4020pi   1121 Jan 19 11:32 README.org
+-rwx------ 1 uh 4020pi  13101 Jan 19 11:32 reference-shell.exe
+-rw------- 1 uh 4020pi  88456 Jan 19 11:32 TinyShell_project_help.pdf
