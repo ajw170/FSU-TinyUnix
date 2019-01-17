@@ -28,6 +28,7 @@ int main()
   while (1)
   {
     printf("Prompt>");
+    fflush(stdout);
     if (fgets(line, BUFSIZE, stdin) == NULL)
     {
       printf("There was a problem with the input.");
