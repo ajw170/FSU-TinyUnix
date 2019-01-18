@@ -3,6 +3,8 @@
  * January 12, 2019
  *
  * Creates a "tiny" Unix shell simulation.
+ *
+ * Note that the code is self-documenting.
  */
 
 #include <stdio.h>
@@ -16,7 +18,7 @@
 //function prototype
 void parse (char *, char **, const char *);
 
-int main()
+int main(int numProgArgs, char * progArgs[])
 {
   pid_t pid;
   int cstatus;
@@ -29,6 +31,28 @@ int main()
   static char * commandDelim = ";\n";
   static char * subDelim = " \n\t";
   bool quitTrigger = 0;
+  bool batchMode = 0;
+
+
+  //determine if the program is running in batch mode or interactive mode
+  printf("%d\n",numProgArgs);
+  if (numProgArgs > 2) // incorrect usage; inform user
+  {
+    printf("Usage: tinysh [batchFile]\n");
+    exit(1);
+  }
+  if (numProgArgs == 2) // entering batch mode, establish file hook.
+  {
+
+
+
+
+    batchMode = 1;
+  }
+
+
+
+
 
   // display the prompt
   while (1)
