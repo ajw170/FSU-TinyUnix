@@ -1,3 +1,2 @@
-ls -l
-echo "Hello world, TinyShell!"
-quit; echo "Bye bye"
+whoami
+ls

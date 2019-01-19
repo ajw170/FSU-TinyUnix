@@ -24,18 +24,18 @@ int main(int numProgArgs, char * progArgs[])
   int cstatus;
   pid_t c;
 
-  int BUFSIZE = 1024;
+  int BUFSIZE = 520; //offers a bit more space to cushion 512.
   char line[BUFSIZE];
-  char * commandv[1024] = {NULL}; //1024 possible separate commands
+  char * commandv[520] = {NULL}; //520 possible separate commands, not possible since buf is limited to 520 total chars
   char * argv[64] = {NULL}; //max arguments is 64
   static char * commandDelim = ";\n";
   static char * subDelim = " \n\t";
   bool quitTrigger = 0;
   bool batchMode = 0;
-
+  FILE * filePtr = 0;
+  FILE * programMode = stdin; //defaults to stdin, but can be changed to file.
 
   //determine if the program is running in batch mode or interactive mode
-  printf("%d\n",numProgArgs);
   if (numProgArgs > 2) // incorrect usage; inform user
   {
     printf("Usage: tinysh [batchFile]\n");
@@ -43,29 +43,44 @@ int main(int numProgArgs, char * progArgs[])
   }
   if (numProgArgs == 2) // entering batch mode, establish file hook.
   {
-
-
-
-
+    filePtr = fopen(progArgs[1],"r");
+    if (filePtr == NULL)
+      perror("fopen()");
     batchMode = 1;
+    programMode = filePtr;
   }
-
-
-
-
 
   // display the prompt
   while (1)
   {
     if (quitTrigger)
-      exit(0); //quit program
-    printf("Prompt>");
-    fflush(stdout);
-    if (fgets(line, BUFSIZE, stdin) == NULL) //uses existing line buffer as memory store
     {
-      perror("The following error occurred");
+      fclose(programMode);
+      exit(0);
     }
-    else //valid entry, now parse the arguments
+    if (batchMode == 0)
+    {
+      printf("Prompt>");
+      fflush(stdout);
+    }
+    if (fgets(line, BUFSIZE, programMode) == NULL) //uses existing line buffer as memory store
+    {
+      if (feof(programMode)) //end of file is encountered
+        exit(1);
+      else
+        perror("The following error occurred");
+    }
+    else if (strlen(line) > 512) //if the line is longer than 512 characters (including \n in the 512th space)
+    {
+      char ch = getc(programMode);
+      while (ch != '\n' && ch != EOF) //keep iterating until newline or EOF is hit.
+      {
+        ch = getc(programMode);
+      }
+      //neline or EOF is hit, continue to next line (or end)
+      fprintf(stderr,"The line exceeded 512 characters. Skipping to next line.\n");
+    }
+    else//valid entry, now parse the arguments
     {
       parse(line,commandv,commandDelim);
       //the line now is separated by individual commands between semicolons, continue processing each one
