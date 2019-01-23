@@ -5,6 +5,10 @@
  * Creates a "tiny" Unix shell simulation.
  *
  * Note that the code is self-documenting.
+ *
+ * Compilation command:
+ * gcc -std=c99 -Wall -Wextra -Werror -o tinysh shell.c
+ *
  */
 
 #include <stdio.h>
