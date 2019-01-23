@@ -1,0 +1,42 @@
+Name: Andrew Joseph Wood
+FSU ID: ajw14m
+
+Tiny Unix Shell Readme
+
+Project Overview:
+
+The Tiny Unix shell is a remarkably simple program.  A FILE pointer is set to either stdin or a filename depending
+on whether the program is in interactive or batch mode, respectively.  This is determined by the program arguments; if the program
+is launched with arguments, the shell is run in batch mode, otherwise, the shell is run in interactive mode.
+
+
+Complete Specification:
+
+Once the mode is determined, commands are read either from the batch file or the stdin.  If the line being read exceeds 512 characters,
+the line is ignored and the program skips to the next line.  Note that this is an exceptional case and it is extremely unlikely
+that there would be a command line exceeding 512 characters.
+
+Once the line is read, it enters the FIRST parse routine, which splits the line up into comamnds separated by either a semicolon
+or a newline (\n).  Each separate command (with arguemnts) is pointed to by the commandv char pointer array.
+
+The commandv char pointer array is then iterated through and each command is parsed again with the same parse function, this time
+with the delimeter including a space, newline, and tab.  Note that if there is no command found when excluding these characters, the
+value is marked as NULL.
+
+Once the individual command is parsed (e.g. ls -lah), each portion of the command is pointed to by the argv char pointer array.
+A fork() call is issued to duplicate the parent process.  Then, when in the child process, an excecvp command is issued to using
+argv[0] as the first argument and the entirety of the argv array as the second argument.  Note that since the argv array is initalized
+to all NULL values, there will not be a buffer overrun.
+
+The parent process then waits for the child process to complete and issues a message with the PID indicating the exit status.  If there
+is a problem within the child process, the process informs the user of the issue and exits.
+
+Before restarting the next command parse, the argv array is set to all 0s to ensure no subsequent parses are erroneous.
+
+The beauty of the Tiny Unix Shell is the simplicity.  Most of the error conditions are handled within the process calls themselves.  Also,
+the reusuable parse function allows for re-use with the argument for delimiter.
+
+
+Known Bugs and Problems:
+
+At the time of this writing, there are no known bugs or implementation problems with the Tiny Unix Shell.
