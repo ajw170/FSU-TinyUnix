@@ -33,6 +33,9 @@ is a problem within the child process, the process informs the user of the issue
 
 Before restarting the next command parse, the argv array is set to all 0s to ensure no subsequent parses are erroneous.
 
+Note that if any argument is determed to be "quit", the program will set a quit flag, which tells the program to exit before the next group of semicolon-
+delimited commands is run.
+
 The beauty of the Tiny Unix Shell is the simplicity.  Most of the error conditions are handled within the process calls themselves.  Also,
 the reusuable parse function allows for re-use with the argument for delimiter.
 
